@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Image from "next/image";
+
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xlgeboyl";
 
@@ -72,9 +74,17 @@ export default function Contact() {
           {/* Left: Context / alt contact */}
           <div className="p-8 bg-gradient-to-b from-white to-slate-50">
             <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center text-lg font-semibold text-slate-700">
-                DA
+              <div className="relative w-14 h-14 rounded-full overflow-hidden bg-slate-100 flex-shrink-0">
+                <Image
+                  src="/images/boku.jpeg"
+                  alt="Dayron Anjos"
+                  fill
+                  sizes="56px"
+                  className="object-cover"
+                  priority
+                />
               </div>
+
               <div>
                 <h1 className="text-2xl font-bold">Contact</h1>
                 <p className="text-slate-600 mt-2">
@@ -200,9 +210,8 @@ export default function Contact() {
               <div className="flex items-center gap-3">
                 <button
                   type="submit"
-                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium ${
-                    status === "sending" || status === "sent" ? "bg-slate-300 text-slate-700 cursor-not-allowed" : "bg-brand text-white"
-                  }`}
+                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium ${status === "sending" || status === "sent" ? "bg-slate-300 text-slate-700 cursor-not-allowed" : "bg-brand text-white"
+                    }`}
                   disabled={status === "sending" || status === "sent"}
                 >
                   {status === "sending" ? (

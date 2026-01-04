@@ -1,11 +1,38 @@
 import Link from "next/link";
 import { getAllProjects } from "../lib/projects";
 import ProjectCard from "../components/project/ProjectCard";
+import Image from "next/image";
 
-function AvatarSVG({ initials = "DA" }: { initials?: string }) {
+type AvatarProps = {
+  src?: string;
+  initials?: string;
+  size?: number; // px
+};
+
+export function AvatarSVG({
+  src = "/images/boku.jpeg",
+  initials = "DA",
+  size = 80,
+}: AvatarProps) {
   return (
-    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-md">
-      <span className="text-white font-semibold">{initials}</span>
+    <div
+      className="relative rounded-full overflow-hidden bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-md flex-shrink-0"
+      style={{ width: size, height: size }}
+    >
+      {src ? (
+        <Image
+          src={src}
+          alt="Dayron Anjos"
+          fill
+          sizes={`${size}px`}
+          className="object-cover"
+          priority
+        />
+      ) : (
+        <span className="text-white font-semibold">
+          {initials}
+        </span>
+      )}
     </div>
   );
 }

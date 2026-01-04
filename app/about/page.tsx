@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
   title: "About — Dayron Anjos",
@@ -6,13 +7,37 @@ export const metadata = {
     "Dayron Anjos — Software engineering student & IT Support Analyst. Backend, automation and maintainability focused.",
 };
 
-function AvatarSVG({ initials = "DA" }: { initials?: string }) {
+
+type AvatarProps = {
+  src?: string;
+  initials?: string;
+  size?: number; // px
+};
+
+export function AvatarSVG({
+  src = "/images/boku.jpeg",
+  initials = "DA",
+  size = 80,
+}: AvatarProps) {
   return (
     <div
-      aria-hidden
-      className="w-20 h-20 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center shadow-md"
+      className="relative rounded-full overflow-hidden bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-md flex-shrink-0"
+      style={{ width: size, height: size }}
     >
-      <span className="text-white font-semibold">{initials}</span>
+      {src ? (
+        <Image
+          src={src}
+          alt="Dayron Anjos"
+          fill
+          sizes={`${size}px`}
+          className="object-cover"
+          priority
+        />
+      ) : (
+        <span className="text-white font-semibold">
+          {initials}
+        </span>
+      )}
     </div>
   );
 }
